@@ -1,0 +1,40 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+{% block content %}
+  <div class="flex justify-end mb-4">
+    <a href="/add" class="text-blue-600 hover:underline font-medium">+ Add Meeting</a>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white shadow rounded-lg">
+      <thead class="bg-gray-200 text-gray-700 text-sm">
+        <tr>
+          <th class="p-3 text-left">Title</th>
+          <th class="p-3 text-left">Meeting ID</th>
+          <th class="p-3 text-left">Password</th>
+          <th class="p-3 text-left">Participant</th>
+          <th class="p-3 text-left">Date & Time</th>
+          <th class="p-3 text-left">Mic</th>
+          <th class="p-3 text-left">Camera</th>
+          <th class="p-3 text-left">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for meeting in meetings %}
+        <tr class="border-t text-sm">
+          <td class="p-3">{{ meeting.title }}</td>
+          <td class="p-3">{{ meeting.meeting_id }}</td>
+          <td class="p-3">{{ meeting.password }}</td>
+          <td class="p-3">{{ meeting.participant_name }}</td>
+          <td class="p-3">{{ meeting.datetime }}</td>
+          <td class="p-3">{{ 'On' if meeting.mic else 'Off' }}</td>
+          <td class="p-3">{{ 'On' if meeting.camera else 'Off' }}</td>
+          <td class="p-3">
+            <a href="/edit/{{ meeting.id }}" class="text-blue-600 hover:underline">Edit</a> |
+            <a href="/delete/{{ meeting.id }}" class="text-red-600 hover:underline">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
